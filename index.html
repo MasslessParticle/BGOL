@@ -1,0 +1,22 @@
+<html>
+	<head>
+		<script type="text/javascript" src="./scripts/bgol_impl.js"></script>
+		<script type="text/javascript" src="./scripts/bgol_game_surface.js"></script>
+		<title>Browser Game of Life (BGOL) implementation</title>
+	</head>
+	
+	<body>
+		<H1 style="text-align: center; width: 600px; margin-left: auto; margin-right: auto;">Browser-base Game of Life (BGOL)</H1>
+		<div id="gameboard" style="margin-left: auto; margin-right: auto;">
+			<script>
+				b = new BGOL(document.getElementById("gameboard"));
+			</script>
+		</div>
+		<div id="nav" style="text-align: center; width: 600px; margin-left: auto; margin-right: auto;">
+			<button type="button" onclick='b.start()'>Start</button>
+			<button type="button" onclick='b.stop()'>Stop</button>
+			<button type="button" onclick='b.reset()'>New</button>
+		</div>
+	</body>
+	
+</html>
