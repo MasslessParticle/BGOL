@@ -21,11 +21,7 @@ GameSurface.prototype.draw = function(){
 			if (this.m_table_[i][j]){
 				context.fillRect(x,y,x_step,y_step);
 			} 
-			//else {
-			//	context.strokeStyle = "#eee";
-			//	context.strokeRect(x,y,x_step,y_step);
-			//}
-			
+						
 			y += y_step;
 		}
 		x += x_step;
