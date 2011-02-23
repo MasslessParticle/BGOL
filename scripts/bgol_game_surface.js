@@ -14,15 +14,17 @@ GameSurface.prototype.draw = function(){
 	context = this.m_canvas_.getContext("2d");
 	
 	context.clearRect(0,0,this.m_canvas_.width, this.m_canvas_.height);
+	context.strokeRect(0,0,this.m_canvas_.width, this.m_canvas_.height);
 	
 	for (i=0; i < this.m_numRowCol; i++){
 		for (j=0; j < this.m_numRowCol; j++){
 			if (this.m_table_[i][j]){
 				context.fillRect(x,y,x_step,y_step);
-			} else {
-				context.strokeStyle = "#eee";
-				context.strokeRect(x,y,x_step,y_step);
-			}
+			} 
+			//else {
+			//	context.strokeStyle = "#eee";
+			//	context.strokeRect(x,y,x_step,y_step);
+			//}
 			
 			y += y_step;
 		}
