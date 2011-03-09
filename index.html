@@ -8,6 +8,15 @@
 	
 	<body>
 		<H1 style="text-align: center; width: 600px; margin-left: auto; margin-right: auto;">Browser-base Game of Life (BGOL)</H1>
+		<div id="instructions" style="float: left; margin-left: 9%;  margin-right: 0px;">
+			<h2 style="text-align: center;">Instructions</h2>
+			<ol>
+				<li>Click and drag or click "Random" to create colonies</li>
+				<li>Click "Start" to set it all in motion</li>
+				<li>Click "Stop" to stop</li>
+				<li>Click "New" to start all over</li>
+			</ol>
+		</div>
 		<div id="gameboard" style="margin-left: auto; margin-right: auto;">
 			<script>
 				b = new BGOL(document.getElementById("gameboard"));
@@ -17,6 +26,7 @@
 			<button type="button" onclick='b.start()'>Start</button>
 			<button type="button" onclick='b.stop()'>Stop</button>
 			<button type="button" onclick='b.reset()'>New</button>
+			<button type="button" onclick='b.random()'>Random</button>
 		</div>
 	</body>
 	

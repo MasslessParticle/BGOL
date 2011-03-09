@@ -12,14 +12,14 @@ BGOL.prototype.__init__ = function(div){
 	this.createGameSurface();
 };
 
-BGOL.prototype.createGameSurface =function(){
+BGOL.prototype.createGameSurface = function(){
 	this.m_gameSurface = new GameSurface(BGOL.NUM_ROW_COL, this.m_canvas_);
 	this.m_gameSurface.draw();
 };
 
 BGOL.prototype.reset = function() {
 	this.stop();
-	this.createGameSurface();
+	this.__init__(this.m_div);
 };
 
 BGOL.prototype.start = function(){
@@ -30,6 +30,10 @@ BGOL.prototype.start = function(){
 
 BGOL.prototype.stop = function(){
 	clearTimeout(this.timer);
+};
+
+BGOL.prototype.random = function(){
+	this.m_gameSurface.populateGrid();
 };
 
 BGOL.prototype.createCanvas = function(div) {
@@ -61,6 +65,8 @@ BGOL.prototype.createCanvas = function(div) {
 	this.m_canvas_.style.position = "absolute";
 	this.m_canvas_.width = this.m_width_;
 	this.m_canvas_.height = this.m_height_;
+	
+	
 
 	// The interactive parts of the graph are drawn on top of the chart.
 	div.appendChild(this.m_canvas_);
