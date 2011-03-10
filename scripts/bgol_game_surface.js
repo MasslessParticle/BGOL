@@ -1,3 +1,26 @@
+/**
+ * Copyright 2011 Travis Patterson
+ *  
+ * This file is part of BGOL.
+ * 
+ * BGOL is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ * 
+ * BGOL is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ * 
+ * You should have received a copy of the GNU General Public License
+ * along with BGOL.  If not, see <http://www.gnu.org/licenses/>.
+ */
+
+/**
+ * Creates a new game surface. Takes size of game board and the canvas to
+ * draw on
+ */
 GameSurface = function(numRowCol, canvas){
 	this.m_canvas = canvas;
 	this.m_numRowCol = numRowCol; 
@@ -9,6 +32,7 @@ GameSurface = function(numRowCol, canvas){
 	var x = null;
 	var y = null;
 	
+	//Mouse down listener, adds/removes life
 	canvas.onmousedown = function(e) {
 	    x = e.clientX - game_surface.m_canvas.offsetLeft;
 	    y = e.clientY - game_surface.m_canvas.offsetTop;
@@ -18,6 +42,7 @@ GameSurface = function(numRowCol, canvas){
 	    game_surface.draw();
 	};
 	
+	//Allows "paintin" of life on the canvas
 	canvas.onmousemove = function(e) {
 		if (x == null || y == null) {
 			return;
@@ -30,12 +55,16 @@ GameSurface = function(numRowCol, canvas){
 		game_surface.draw();
   	};
   	
+  	//Resets mouse environment.
   	canvas.onmouseup = function(e) {
   		x = null;
   		y = null;
   	};
 };
 
+/**
+ * Draws the game surface.
+ */
 GameSurface.prototype.draw = function(){
 	var x_step = this.m_canvas.width / this.m_numRowCol;
 	var y_step = this.m_canvas.height / this.m_numRowCol;
@@ -60,6 +89,10 @@ GameSurface.prototype.draw = function(){
 	}
 };
 
+/**
+ * Creates a new, empty, game representation
+ * @returns {Array} game representation
+ */
 GameSurface.prototype.generateGrid = function(){
 	var grid = new Array(this.m_numRowCol);
 	for (i = 0; i < grid.length; i++){
@@ -68,6 +101,9 @@ GameSurface.prototype.generateGrid = function(){
 	return grid;
 };
 
+/**
+ * Populates a game representation with a random assortment of life
+ */
 GameSurface.prototype.populateGrid = function(){
 	grid = this.m_table;
 	for(i = 0; i < grid.length; i++){
@@ -79,6 +115,10 @@ GameSurface.prototype.populateGrid = function(){
 	this.draw();
 };
 
+/**
+ * Applies the rules from Conway's Game of Life to the board
+ * to determine next generation.
+ */
 GameSurface.prototype.update = function(){
 	newState = this.generateGrid();	
 	
@@ -92,6 +132,12 @@ GameSurface.prototype.update = function(){
 	this.draw();
 };
 
+/**
+ * Checks to see if a cell is alive or not.
+ * @param x X coordinate of cell on gameboard
+ * @param y Y coordinate of cell on gameboard
+ * @returns True if this cell contains life
+ */
 GameSurface.prototype.checkCoord = function(x, y){
 	numNeighbours = 0;
 	numNeighbours = this.countNeighbours(x,y);
@@ -107,6 +153,12 @@ GameSurface.prototype.checkCoord = function(x, y){
 	return this.m_table[x][y];
 };
 
+/**
+ * Determines the number of neighbour cells to x,y is alive
+ * @param x X coordinate of cell on gameboard
+ * @param y Y coordinate of cell on gameboard
+ * @returns number of living cells surrounding x,y
+ */
 GameSurface.prototype.countNeighbours = function(x, y) {
 	num = 0;
 	x_minus_1 = (x - 1 >= 0) ? x - 1 : this.m_numRowCol - 1;
